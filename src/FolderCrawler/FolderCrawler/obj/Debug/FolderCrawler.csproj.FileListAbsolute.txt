@@ -1,0 +1,10 @@
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\FolderCrawler.exe.config
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\FolderCrawler.exe
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\FolderCrawler.pdb
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.AssemblyReference.cache
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.SuggestedBindingRedirects.cache
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.Properties.Resources.resources
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.GenerateResource.cache
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.CoreCompileInputs.cache
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.exe
+C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.pdb
