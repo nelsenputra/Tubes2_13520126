@@ -3,8 +3,9 @@
     "",
     "\\bin",
     "\\doc",
-    "\\src"
+    "\\src",
+    "\\src\\FolderCrawler",
+    "\\src\\FolderCrawler\\FolderCrawler"
   ],
-  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }

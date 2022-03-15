@@ -8,3 +8,9 @@ C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\Folder
 C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.CoreCompileInputs.cache
 C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.exe
 C:\Users\owner\source\repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.pdb
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\AutomaticGraphLayout.dll
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\AutomaticGraphLayout.Drawing.dll
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.Form1.resources
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.CopyComplete
