@@ -12,5 +12,5 @@ C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\Folder
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\AutomaticGraphLayout.Drawing.dll
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
-C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.Form1.resources
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.CopyComplete
+C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.MainForm.resources

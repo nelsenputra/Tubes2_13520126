@@ -1,6 +1,6 @@
 ﻿namespace FolderCrawler
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,215 +28,250 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.PathFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.gViewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
             this.ConfigPanel = new System.Windows.Forms.Panel();
-            this.TitleLabel = new System.Windows.Forms.Label();
-            this.StartDirLabel = new System.Windows.Forms.Label();
-            this.FileNameLabel = new System.Windows.Forms.Label();
-            this.SearchMethodLabel = new System.Windows.Forms.Label();
-            this.FindAllOccCheckbox = new System.Windows.Forms.CheckBox();
-            this.DFSButton = new System.Windows.Forms.Button();
-            this.BFSButton = new System.Windows.Forms.Button();
-            this.FileNameTextBox = new System.Windows.Forms.TextBox();
+            this.AllOccCheckbox = new System.Windows.Forms.CheckBox();
             this.SearchButton = new System.Windows.Forms.Button();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.SelectDirButton = new System.Windows.Forms.Button();
-            this.gViewer1 = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            this.BFSButton = new System.Windows.Forms.Button();
+            this.DFSButton = new System.Windows.Forms.Button();
+            this.FileNameTextBox = new System.Windows.Forms.TextBox();
             this.StartDirLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.StartDirButton = new System.Windows.Forms.Button();
+            this.SearchMethodLabel = new System.Windows.Forms.Label();
+            this.FileNameLabel = new System.Windows.Forms.Label();
+            this.StartDirLabel = new System.Windows.Forms.Label();
+            this.TitleLabel = new System.Windows.Forms.Label();
+            this.TableLayoutPanel.SuspendLayout();
             this.ConfigPanel.SuspendLayout();
             this.SuspendLayout();
             // 
+            // TableLayoutPanel
+            // 
+            this.TableLayoutPanel.BackColor = System.Drawing.Color.White;
+            this.TableLayoutPanel.ColumnCount = 2;
+            this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 440F));
+            this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.TableLayoutPanel.Controls.Add(this.PathFlowPanel, 1, 1);
+            this.TableLayoutPanel.Controls.Add(this.gViewer, 1, 0);
+            this.TableLayoutPanel.Controls.Add(this.ConfigPanel, 0, 0);
+            this.TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.TableLayoutPanel.Name = "TableLayoutPanel";
+            this.TableLayoutPanel.RowCount = 2;
+            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TableLayoutPanel.Size = new System.Drawing.Size(1134, 601);
+            this.TableLayoutPanel.TabIndex = 0;
+            // 
+            // PathFlowPanel
+            // 
+            this.PathFlowPanel.AutoScroll = true;
+            this.PathFlowPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PathFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PathFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.PathFlowPanel.Location = new System.Drawing.Point(443, 483);
+            this.PathFlowPanel.Name = "PathFlowPanel";
+            this.PathFlowPanel.Size = new System.Drawing.Size(688, 115);
+            this.PathFlowPanel.TabIndex = 0;
+            this.PathFlowPanel.WrapContents = false;
+            // 
+            // gViewer
+            // 
+            this.gViewer.ArrowheadLength = 10D;
+            this.gViewer.AsyncLayout = false;
+            this.gViewer.AutoScroll = true;
+            this.gViewer.BackwardEnabled = false;
+            this.gViewer.BuildHitTree = true;
+            this.gViewer.CurrentLayoutMethod = Microsoft.Msagl.GraphViewerGdi.LayoutMethod.UseSettingsOfTheGraph;
+            this.gViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gViewer.EdgeInsertButtonVisible = true;
+            this.gViewer.FileName = "";
+            this.gViewer.ForwardEnabled = false;
+            this.gViewer.Graph = null;
+            this.gViewer.InsertingEdge = false;
+            this.gViewer.LayoutAlgorithmSettingsButtonVisible = true;
+            this.gViewer.LayoutEditingEnabled = true;
+            this.gViewer.Location = new System.Drawing.Point(443, 3);
+            this.gViewer.LooseOffsetForRouting = 0.25D;
+            this.gViewer.MouseHitDistance = 0.05D;
+            this.gViewer.Name = "gViewer";
+            this.gViewer.NavigationVisible = true;
+            this.gViewer.NeedToCalculateLayout = true;
+            this.gViewer.OffsetForRelaxingInRouting = 0.6D;
+            this.gViewer.PaddingForEdgeRouting = 8D;
+            this.gViewer.PanButtonPressed = false;
+            this.gViewer.SaveAsImageEnabled = true;
+            this.gViewer.SaveAsMsaglEnabled = true;
+            this.gViewer.SaveButtonVisible = true;
+            this.gViewer.SaveGraphButtonVisible = true;
+            this.gViewer.SaveInVectorFormatEnabled = true;
+            this.gViewer.Size = new System.Drawing.Size(688, 474);
+            this.gViewer.TabIndex = 1;
+            this.gViewer.TightOffsetForRouting = 0.125D;
+            this.gViewer.ToolBarIsVisible = true;
+            this.gViewer.Transform = ((Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation)(resources.GetObject("gViewer.Transform")));
+            this.gViewer.UndoRedoButtonsVisible = true;
+            this.gViewer.WindowZoomButtonPressed = false;
+            this.gViewer.ZoomF = 1D;
+            this.gViewer.ZoomWindowThreshold = 0.05D;
+            // 
             // ConfigPanel
             // 
-            this.ConfigPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.ConfigPanel.Controls.Add(this.StartDirLinkLabel);
-            this.ConfigPanel.Controls.Add(this.SelectDirButton);
+            this.ConfigPanel.AutoScroll = true;
+            this.ConfigPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ConfigPanel.Controls.Add(this.AllOccCheckbox);
             this.ConfigPanel.Controls.Add(this.SearchButton);
-            this.ConfigPanel.Controls.Add(this.FileNameTextBox);
             this.ConfigPanel.Controls.Add(this.BFSButton);
             this.ConfigPanel.Controls.Add(this.DFSButton);
-            this.ConfigPanel.Controls.Add(this.FindAllOccCheckbox);
+            this.ConfigPanel.Controls.Add(this.FileNameTextBox);
+            this.ConfigPanel.Controls.Add(this.StartDirLinkLabel);
+            this.ConfigPanel.Controls.Add(this.StartDirButton);
             this.ConfigPanel.Controls.Add(this.SearchMethodLabel);
             this.ConfigPanel.Controls.Add(this.FileNameLabel);
             this.ConfigPanel.Controls.Add(this.StartDirLabel);
             this.ConfigPanel.Controls.Add(this.TitleLabel);
-            this.ConfigPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ConfigPanel.Location = new System.Drawing.Point(0, 0);
+            this.ConfigPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ConfigPanel.Location = new System.Drawing.Point(3, 3);
             this.ConfigPanel.Name = "ConfigPanel";
-            this.ConfigPanel.Size = new System.Drawing.Size(440, 601);
-            this.ConfigPanel.TabIndex = 0;
+            this.TableLayoutPanel.SetRowSpan(this.ConfigPanel, 2);
+            this.ConfigPanel.Size = new System.Drawing.Size(434, 595);
+            this.ConfigPanel.TabIndex = 2;
             // 
-            // TitleLabel
+            // AllOccCheckbox
             // 
-            this.TitleLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TitleLabel.AutoSize = true;
-            this.TitleLabel.Font = new System.Drawing.Font("Lucida Sans Unicode", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.Location = new System.Drawing.Point(85, 18);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(260, 42);
-            this.TitleLabel.TabIndex = 2;
-            this.TitleLabel.Text = "FolderCrawler";
-            this.TitleLabel.Click += new System.EventHandler(this.label1_Click);
+            this.AllOccCheckbox.AutoSize = true;
+            this.AllOccCheckbox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.AllOccCheckbox.Location = new System.Drawing.Point(50, 322);
+            this.AllOccCheckbox.Name = "AllOccCheckbox";
+            this.AllOccCheckbox.Size = new System.Drawing.Size(208, 29);
+            this.AllOccCheckbox.TabIndex = 10;
+            this.AllOccCheckbox.Text = "Find All Occurance";
+            this.AllOccCheckbox.UseVisualStyleBackColor = true;
             // 
-            // StartDirLabel
+            // SearchButton
             // 
-            this.StartDirLabel.AutoSize = true;
-            this.StartDirLabel.Location = new System.Drawing.Point(31, 85);
-            this.StartDirLabel.Name = "StartDirLabel";
-            this.StartDirLabel.Size = new System.Drawing.Size(175, 25);
-            this.StartDirLabel.TabIndex = 3;
-            this.StartDirLabel.Text = "Starting Directory";
-            this.StartDirLabel.Click += new System.EventHandler(this.StartDirLabel_Click);
+            this.SearchButton.Location = new System.Drawing.Point(44, 502);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(100, 50);
+            this.SearchButton.TabIndex = 9;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // FileNameLabel
+            // BFSButton
             // 
-            this.FileNameLabel.AutoSize = true;
-            this.FileNameLabel.Location = new System.Drawing.Point(31, 210);
-            this.FileNameLabel.Name = "FileNameLabel";
-            this.FileNameLabel.Size = new System.Drawing.Size(106, 25);
-            this.FileNameLabel.TabIndex = 4;
-            this.FileNameLabel.Text = "File Name";
+            this.BFSButton.BackColor = System.Drawing.Color.Transparent;
+            this.BFSButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.BFSButton.FlatAppearance.BorderSize = 5;
+            this.BFSButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BFSButton.ForeColor = System.Drawing.Color.DimGray;
+            this.BFSButton.Location = new System.Drawing.Point(220, 402);
+            this.BFSButton.Name = "BFSButton";
+            this.BFSButton.Size = new System.Drawing.Size(170, 60);
+            this.BFSButton.TabIndex = 8;
+            this.BFSButton.Text = "BFS";
+            this.BFSButton.UseVisualStyleBackColor = false;
+            this.BFSButton.Click += new System.EventHandler(this.BFSButton_Click);
+            // 
+            // DFSButton
+            // 
+            this.DFSButton.BackColor = System.Drawing.Color.Transparent;
+            this.DFSButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.DFSButton.FlatAppearance.BorderSize = 5;
+            this.DFSButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DFSButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.DFSButton.Location = new System.Drawing.Point(50, 402);
+            this.DFSButton.Name = "DFSButton";
+            this.DFSButton.Size = new System.Drawing.Size(170, 60);
+            this.DFSButton.TabIndex = 7;
+            this.DFSButton.Text = "DFS";
+            this.DFSButton.UseVisualStyleBackColor = false;
+            this.DFSButton.Click += new System.EventHandler(this.DFSButton_Click);
+            // 
+            // FileNameTextBox
+            // 
+            this.FileNameTextBox.Location = new System.Drawing.Point(49, 273);
+            this.FileNameTextBox.Name = "FileNameTextBox";
+            this.FileNameTextBox.Size = new System.Drawing.Size(350, 33);
+            this.FileNameTextBox.TabIndex = 6;
+            // 
+            // StartDirLinkLabel
+            // 
+            this.StartDirLinkLabel.AutoEllipsis = true;
+            this.StartDirLinkLabel.LinkColor = System.Drawing.Color.Cyan;
+            this.StartDirLinkLabel.Location = new System.Drawing.Point(44, 187);
+            this.StartDirLinkLabel.Name = "StartDirLinkLabel";
+            this.StartDirLinkLabel.Size = new System.Drawing.Size(350, 25);
+            this.StartDirLinkLabel.TabIndex = 5;
+            this.StartDirLinkLabel.TabStop = true;
+            this.StartDirLinkLabel.Text = "C:\\";
+            this.StartDirLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.StartDirLinkLabel_LinkClicked);
+            // 
+            // StartDirButton
+            // 
+            this.StartDirButton.Location = new System.Drawing.Point(49, 134);
+            this.StartDirButton.Name = "StartDirButton";
+            this.StartDirButton.Size = new System.Drawing.Size(170, 40);
+            this.StartDirButton.TabIndex = 4;
+            this.StartDirButton.Text = "Select Directory";
+            this.StartDirButton.UseVisualStyleBackColor = true;
+            this.StartDirButton.Click += new System.EventHandler(this.StartDirButton_Click);
             // 
             // SearchMethodLabel
             // 
             this.SearchMethodLabel.AutoSize = true;
-            this.SearchMethodLabel.Location = new System.Drawing.Point(31, 355);
+            this.SearchMethodLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.SearchMethodLabel.Location = new System.Drawing.Point(39, 359);
             this.SearchMethodLabel.Name = "SearchMethodLabel";
-            this.SearchMethodLabel.Size = new System.Drawing.Size(184, 25);
-            this.SearchMethodLabel.TabIndex = 5;
-            this.SearchMethodLabel.Text = "Searching Method";
+            this.SearchMethodLabel.Size = new System.Drawing.Size(154, 25);
+            this.SearchMethodLabel.TabIndex = 3;
+            this.SearchMethodLabel.Text = "Search Method";
             // 
-            // FindAllOccCheckbox
+            // FileNameLabel
             // 
-            this.FindAllOccCheckbox.AutoSize = true;
-            this.FindAllOccCheckbox.Location = new System.Drawing.Point(40, 301);
-            this.FindAllOccCheckbox.Name = "FindAllOccCheckbox";
-            this.FindAllOccCheckbox.Size = new System.Drawing.Size(202, 29);
-            this.FindAllOccCheckbox.TabIndex = 6;
-            this.FindAllOccCheckbox.Text = "Find all occurance";
-            this.FindAllOccCheckbox.UseVisualStyleBackColor = true;
-            this.FindAllOccCheckbox.CheckedChanged += new System.EventHandler(this.FindAllOccCheckbox_CheckedChanged);
+            this.FileNameLabel.AutoSize = true;
+            this.FileNameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.FileNameLabel.Location = new System.Drawing.Point(39, 231);
+            this.FileNameLabel.Name = "FileNameLabel";
+            this.FileNameLabel.Size = new System.Drawing.Size(106, 25);
+            this.FileNameLabel.TabIndex = 2;
+            this.FileNameLabel.Text = "File Name";
             // 
-            // DFSButton
+            // StartDirLabel
             // 
-            this.DFSButton.Location = new System.Drawing.Point(40, 392);
-            this.DFSButton.Name = "DFSButton";
-            this.DFSButton.Size = new System.Drawing.Size(180, 60);
-            this.DFSButton.TabIndex = 7;
-            this.DFSButton.Text = "DFS";
-            this.DFSButton.UseVisualStyleBackColor = true;
+            this.StartDirLabel.AutoSize = true;
+            this.StartDirLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.StartDirLabel.Location = new System.Drawing.Point(34, 93);
+            this.StartDirLabel.Name = "StartDirLabel";
+            this.StartDirLabel.Size = new System.Drawing.Size(175, 25);
+            this.StartDirLabel.TabIndex = 1;
+            this.StartDirLabel.Text = "Starting Directory";
             // 
-            // BFSButton
+            // TitleLabel
             // 
-            this.BFSButton.Location = new System.Drawing.Point(220, 392);
-            this.BFSButton.Name = "BFSButton";
-            this.BFSButton.Size = new System.Drawing.Size(180, 60);
-            this.BFSButton.TabIndex = 8;
-            this.BFSButton.Text = "BFS";
-            this.BFSButton.UseVisualStyleBackColor = true;
+            this.TitleLabel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.TitleLabel.Location = new System.Drawing.Point(110, 32);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(200, 29);
+            this.TitleLabel.TabIndex = 0;
+            this.TitleLabel.Text = "Folder Crawler";
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FileNameTextBox
-            // 
-            this.FileNameTextBox.Location = new System.Drawing.Point(40, 249);
-            this.FileNameTextBox.Name = "FileNameTextBox";
-            this.FileNameTextBox.Size = new System.Drawing.Size(360, 33);
-            this.FileNameTextBox.TabIndex = 9;
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Location = new System.Drawing.Point(40, 505);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(180, 60);
-            this.SearchButton.TabIndex = 10;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = true;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // SelectDirButton
-            // 
-            this.SelectDirButton.Location = new System.Drawing.Point(40, 122);
-            this.SelectDirButton.Name = "SelectDirButton";
-            this.SelectDirButton.Size = new System.Drawing.Size(170, 37);
-            this.SelectDirButton.TabIndex = 2;
-            this.SelectDirButton.Text = "Select Directory";
-            this.SelectDirButton.UseVisualStyleBackColor = true;
-            this.SelectDirButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // gViewer1
-            // 
-            this.gViewer1.ArrowheadLength = 10D;
-            this.gViewer1.AsyncLayout = false;
-            this.gViewer1.AutoScroll = true;
-            this.gViewer1.BackwardEnabled = false;
-            this.gViewer1.BuildHitTree = true;
-            this.gViewer1.CurrentLayoutMethod = Microsoft.Msagl.GraphViewerGdi.LayoutMethod.UseSettingsOfTheGraph;
-            this.gViewer1.EdgeInsertButtonVisible = true;
-            this.gViewer1.FileName = "";
-            this.gViewer1.ForwardEnabled = false;
-            this.gViewer1.Graph = null;
-            this.gViewer1.InsertingEdge = false;
-            this.gViewer1.LayoutAlgorithmSettingsButtonVisible = true;
-            this.gViewer1.LayoutEditingEnabled = true;
-            this.gViewer1.Location = new System.Drawing.Point(440, 0);
-            this.gViewer1.LooseOffsetForRouting = 0.25D;
-            this.gViewer1.MouseHitDistance = 0.05D;
-            this.gViewer1.Name = "gViewer1";
-            this.gViewer1.NavigationVisible = true;
-            this.gViewer1.NeedToCalculateLayout = true;
-            this.gViewer1.OffsetForRelaxingInRouting = 0.6D;
-            this.gViewer1.PaddingForEdgeRouting = 8D;
-            this.gViewer1.PanButtonPressed = false;
-            this.gViewer1.SaveAsImageEnabled = true;
-            this.gViewer1.SaveAsMsaglEnabled = true;
-            this.gViewer1.SaveButtonVisible = true;
-            this.gViewer1.SaveGraphButtonVisible = true;
-            this.gViewer1.SaveInVectorFormatEnabled = true;
-            this.gViewer1.Size = new System.Drawing.Size(694, 452);
-            this.gViewer1.TabIndex = 2;
-            this.gViewer1.TightOffsetForRouting = 0.125D;
-            this.gViewer1.ToolBarIsVisible = true;
-            this.gViewer1.Transform = ((Microsoft.Msagl.Core.Geometry.Curves.PlaneTransformation)(resources.GetObject("gViewer1.Transform")));
-            this.gViewer1.UndoRedoButtonsVisible = true;
-            this.gViewer1.WindowZoomButtonPressed = false;
-            this.gViewer1.ZoomF = 1D;
-            this.gViewer1.ZoomWindowThreshold = 0.05D;
-            // 
-            // StartDirLinkLabel
-            // 
-            this.StartDirLinkLabel.AutoSize = true;
-            this.StartDirLinkLabel.LinkColor = System.Drawing.Color.MediumAquamarine;
-            this.StartDirLinkLabel.Location = new System.Drawing.Point(40, 177);
-            this.StartDirLinkLabel.Name = "StartDirLinkLabel";
-            this.StartDirLinkLabel.Size = new System.Drawing.Size(38, 25);
-            this.StartDirLinkLabel.TabIndex = 11;
-            this.StartDirLinkLabel.TabStop = true;
-            this.StartDirLinkLabel.Text = "C:/";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.DimGray;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(440, 453);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(694, 148);
-            this.flowLayoutPanel1.TabIndex = 3;
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1134, 601);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.gViewer1);
-            this.Controls.Add(this.ConfigPanel);
+            this.Controls.Add(this.TableLayoutPanel);
             this.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "MainForm";
+            this.Text = "Folder Crawler";
+            this.TableLayoutPanel.ResumeLayout(false);
             this.ConfigPanel.ResumeLayout(false);
             this.ConfigPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -244,22 +279,22 @@
         }
 
         #endregion
-
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.TableLayoutPanel TableLayoutPanel;
+        private System.Windows.Forms.FlowLayoutPanel PathFlowPanel;
+        private Microsoft.Msagl.GraphViewerGdi.GViewer gViewer;
         private System.Windows.Forms.Panel ConfigPanel;
-        private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button SearchButton;
-        private System.Windows.Forms.TextBox FileNameTextBox;
         private System.Windows.Forms.Button BFSButton;
         private System.Windows.Forms.Button DFSButton;
-        private System.Windows.Forms.CheckBox FindAllOccCheckbox;
+        private System.Windows.Forms.TextBox FileNameTextBox;
+        private System.Windows.Forms.LinkLabel StartDirLinkLabel;
+        private System.Windows.Forms.Button StartDirButton;
         private System.Windows.Forms.Label SearchMethodLabel;
         private System.Windows.Forms.Label FileNameLabel;
         private System.Windows.Forms.Label StartDirLabel;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.Button SelectDirButton;
-        private Microsoft.Msagl.GraphViewerGdi.GViewer gViewer1;
-        private System.Windows.Forms.LinkLabel StartDirLinkLabel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label TitleLabel;
+        private System.Windows.Forms.CheckBox AllOccCheckbox;
     }
 }
 
