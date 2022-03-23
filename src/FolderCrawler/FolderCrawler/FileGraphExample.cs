@@ -8,31 +8,32 @@ namespace FolderCrawler
 {
     internal static class FileGraphExample
     {
-        public static void mFileGraph()
+        public static void mFileGraph(Microsoft.Msagl.GraphViewerGdi.GViewer viewer)
         {
+            FileGraph fg = new FileGraph("C:/");
             // warnai root merag
-            FileGraph.ColorNodeRed(FileGraph.R);
+            FileGraph.ColorNodeRed(fg.R);
 
             // add node "Folder A", add edge("root", "Folder A") color=red
-            Microsoft.Msagl.Drawing.Node N = FileGraph.AddEdgeRed(FileGraph.R, "Folder A");
+            Microsoft.Msagl.Drawing.Node N = fg.AddEdgeRed(fg.R, "Folder A");
 
             // warnai node "Folder A" merah
             FileGraph.ColorNodeRed(N);
 
             // add node "File 1", add edge("Folder A", "File 1") color=red
-            N = FileGraph.AddEdgeRed(N, "File 1");
+            N = fg.AddEdgeRed(N, "File 1");
 
             // warnai node "File 1" merah
             FileGraph.ColorNodeRed(N);
 
             // add node "Folder A", add edge("root", "Folder B") color=red
-            N = FileGraph.AddEdgeRed(FileGraph.R, "Folder B");
+            N = fg.AddEdgeRed(fg.R, "Folder B");
 
             // warnai node "Folder B" merah
             FileGraph.ColorNodeRed(N);
 
             // add node "File 2", add edge("Folder B", "File 2") color=red
-            N = FileGraph.AddEdgeRed(N, "File 2");
+            N = fg.AddEdgeRed(N, "File 2");
 
             // warnai node "File 2" merah
             FileGraph.ColorNodeRed(N);
@@ -42,16 +43,16 @@ namespace FolderCrawler
             S[0] = ("Folder B");
             S[1] = ("File 2");
 
-            FileGraph.TurnBlue(S);
+            fg.TurnBlue(S);
 
             // add node "File 3", add edge("root", "File 3") color=black
-            N = FileGraph.AddEdgeBlack(FileGraph.R, "File 3");
+            N = fg.AddEdgeBlack(fg.R, "File 3");
 
             // warnai node "File 3" hitam
             FileGraph.ColorNodeBlack(N);
 
             // show graph
-            FileGraph.showGraph();
+            fg.showGraph(viewer);
         }
     }
 }

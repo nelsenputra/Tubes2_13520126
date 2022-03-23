@@ -101,6 +101,7 @@ namespace FolderCrawler
                 {
                     // Lakukan pencarian dengan metode DFS
                     stopwatch.Start();
+                    FileGraphExample.mFileGraph(gViewer);
 
                     // Fungsi pencarian dengan metode DFS
 
@@ -110,6 +111,7 @@ namespace FolderCrawler
                 {
                     // Lakukan pencarian dengan metode BFS
                     stopwatch.Start();
+                    FileGraphExample.mFileGraph(gViewer);
 
                     // Fungsi pencarian dengan metode BFS
 
@@ -139,12 +141,7 @@ namespace FolderCrawler
 
                 // Masih hardcoded pathnya
                 // Untuk mengetes, ganti pathLinkLabel.Text menjadi directory yang valid
-                LinkLabel pathLinkLabel = new LinkLabel();
-                pathLinkLabel.Text = "C:\\Users\\owner\\OneDrive - Institut Teknologi Bandung\\Semester 4\\Strategi Algoritma\\booklet-3-31e2.jpg";
-                pathLinkLabel.AutoSize = true;
-                pathLinkLabel.LinkColor = Color.Cyan;
-                pathLinkLabel.Click += new EventHandler(PathLinkLabel_Clicked);
-                PathFlowPanel.Controls.Add(pathLinkLabel);
+                addDirectoryLinkLabel("C:\\Users\\owner\\OneDrive - Institut Teknologi Bandung\\Semester 4\\Strategi Algoritma\\booklet-3-31e2.jpg", PathFlowPanel);
             }
         }
 
@@ -165,6 +162,16 @@ namespace FolderCrawler
             {
                 MessageBox.Show(string.Format("Error in opening directory {0}", directory));
             }
+        }
+
+        void addDirectoryLinkLabel(String directory, FlowLayoutPanel flp)
+        {
+            LinkLabel pathLinkLabel = new LinkLabel();
+            pathLinkLabel.Text = directory;
+            pathLinkLabel.AutoSize = true;
+            pathLinkLabel.LinkColor = Color.Cyan;
+            pathLinkLabel.Click += new EventHandler(PathLinkLabel_Clicked);
+            flp.Controls.Add(pathLinkLabel);
         }
     }
 }

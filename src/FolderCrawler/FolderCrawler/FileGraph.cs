@@ -8,18 +8,22 @@ namespace FolderCrawler
 {
     internal class FileGraph
     {
-        public static System.Windows.Forms.Form form = new System.Windows.Forms.Form();
-        public static Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
-        public static Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
-        public static Microsoft.Msagl.Drawing.Node R = AddRoot();
+        private Microsoft.Msagl.Drawing.Graph graph;
+        public Microsoft.Msagl.Drawing.Node R;
 
-        // Add Root
-        public static Microsoft.Msagl.Drawing.Node AddRoot()
+        // Constructor
+        public FileGraph(string rootDirectory)
         {
-            Microsoft.Msagl.Drawing.Node R = new Microsoft.Msagl.Drawing.Node(graph.NodeCount.ToString());
-            R.LabelText = "root";
+            setRoot(rootDirectory);
+        }
+
+        // Set Root
+        public void setRoot(string rootDirectory)
+        {
+            graph = new Microsoft.Msagl.Drawing.Graph();
+            R = new Microsoft.Msagl.Drawing.Node(graph.NodeCount.ToString());
+            R.LabelText = rootDirectory;
             graph.AddNode(R);
-            return R;
         }
 
 
@@ -46,7 +50,7 @@ namespace FolderCrawler
 
         // EDGES
         // add new node B and add egde(A,B) with red color
-        public static Microsoft.Msagl.Drawing.Node AddEdgeRed(Microsoft.Msagl.Drawing.Node A, String B)
+        public Microsoft.Msagl.Drawing.Node AddEdgeRed(Microsoft.Msagl.Drawing.Node A, String B)
         {
             Microsoft.Msagl.Drawing.Node N = new Microsoft.Msagl.Drawing.Node(graph.NodeCount.ToString());
             N.LabelText = B;
@@ -57,7 +61,7 @@ namespace FolderCrawler
 
 
         // Turn edge(A,B) to color blue, A and B must be conected
-        public static Microsoft.Msagl.Drawing.Node ColorEdgeBlue(Microsoft.Msagl.Drawing.Node A, String B)
+        public Microsoft.Msagl.Drawing.Node ColorEdgeBlue(Microsoft.Msagl.Drawing.Node A, String B)
         {
             Microsoft.Msagl.Drawing.Node N = null;
             var el = A.OutEdges.ToArray();
@@ -73,7 +77,7 @@ namespace FolderCrawler
         }
 
         // add new node B and add egde(A,B) with black color
-        public static Microsoft.Msagl.Drawing.Node AddEdgeBlack(Microsoft.Msagl.Drawing.Node A, String B)
+        public Microsoft.Msagl.Drawing.Node AddEdgeBlack(Microsoft.Msagl.Drawing.Node A, String B)
         {
             Microsoft.Msagl.Drawing.Node N = new Microsoft.Msagl.Drawing.Node(graph.NodeCount.ToString());
             N.LabelText = B;
@@ -83,7 +87,7 @@ namespace FolderCrawler
         }
 
         // Turn all node root to node goal to color blue. Following the directory path in an array of string (node label)
-        public static void TurnBlue(String[] L)
+        public void TurnBlue(String[] L)
         {
             ColorNodeBlue(R);
             Microsoft.Msagl.Drawing.Node N = R;
@@ -96,17 +100,10 @@ namespace FolderCrawler
 
         // SHOW GRAPH
 
-        public static void showGraph()
+        public void showGraph(Microsoft.Msagl.GraphViewerGdi.GViewer viewer)
         {
             //bind the graph to the viewer 
             viewer.Graph = graph;
-            //associate the viewer with the form 
-            form.SuspendLayout();
-            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            form.Controls.Add(viewer);
-            form.ResumeLayout();
-            //show the form 
-            form.ShowDialog();
         }
 
     }
