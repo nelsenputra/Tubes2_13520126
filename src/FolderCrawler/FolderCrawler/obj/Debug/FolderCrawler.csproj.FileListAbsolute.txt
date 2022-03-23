@@ -14,3 +14,11 @@ C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\Folder
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\bin\Debug\Microsoft.Msagl.WpfGraphControl.dll
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.CopyComplete
 C:\Users\owner\Source\Repos\nelsenputra\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.MainForm.resources
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.AssemblyReference.cache
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.SuggestedBindingRedirects.cache
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.MainForm.resources
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.Properties.Resources.resources
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.GenerateResource.cache
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.csproj.CoreCompileInputs.cache
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.exe
+D:\ITB\Kuliah\Sem4\Strategi Algoritma\Tugas\Tubes2\Tubes2_13520126\src\FolderCrawler\FolderCrawler\obj\Debug\FolderCrawler.pdb
