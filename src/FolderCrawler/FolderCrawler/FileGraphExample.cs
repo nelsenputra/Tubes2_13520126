@@ -10,6 +10,7 @@ namespace FolderCrawler
     {
         public static void mFileGraph(Microsoft.Msagl.GraphViewerGdi.GViewer viewer)
         {
+            /*
             FileGraph fg = new FileGraph("C:/");
             // warnai root merag
             FileGraph.ColorNodeRed(fg.R);
@@ -53,6 +54,7 @@ namespace FolderCrawler
 
             // show graph
             fg.showGraph(viewer);
+            */
         }
     }
 }

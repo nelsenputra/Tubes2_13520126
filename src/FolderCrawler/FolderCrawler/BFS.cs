@@ -6,10 +6,12 @@ using System.Diagnostics;
 
 namespace FolderCrawler {
     public class BFS {
-        private List<string> searchPath;
         private List<string> solutionPath;
-        private float executionTime;
 
+        private Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
+        private FileGraph fileGraph;
+
+        /*
         public static void Main(string[] args) {
             // Mengambil path dari GUI
             string rootPath = @"/Users/";
@@ -28,31 +30,21 @@ namespace FolderCrawler {
 
             // Akses otomatis dilakukan berdasarkan abjad
         }
+        */
 
         public BFS() {
-            this.searchPath = new List<string>();
             this.solutionPath = new List<string>();
-            this.executionTime = 0;
         }
 
-        public float getExecutionTime() {
-            return this.executionTime;
-        }
-
-        public void setExecutionTime(float t) {
-            this.executionTime = t;
-        }
-
-        public List<string> getSearchPaths() {
-            return this.searchPath;
+        public BFS(string rootDirectory, Microsoft.Msagl.GraphViewerGdi.GViewer viewer)
+        {
+            this.solutionPath = new List<string>();
+            this.fileGraph = new FileGraph(rootDirectory);
+            this.viewer = viewer;
         }
 
         public List<string> getSolutionPath() {
             return this.solutionPath;
-        }
-
-        public void addPath(string Path) {
-            this.searchPath.Add(Path);
         }
 
         public void setSolution(string Path) {
@@ -73,97 +65,100 @@ namespace FolderCrawler {
 
         // Mengecek apakah directory bisa ditelusuri (valid atau tidak)
         // Valid apabila directorynya tidak kosong (ada directory lain/file di dalamnya)
-        public bool isDirectoryValid(string dirName, string fileName, string Path) {
-            string[] directories = Directory.GetDirectories(Path, "*");
-            var file = Directory.GetFiles(Path, "*");
+        public bool isDirectoryValid(string directory) {
+            string[] directories = Directory.GetDirectories(directory, "*");
+            var file = Directory.GetFiles(directory, "*");
             bool directoryEmpty = directories.Length == 0;
             bool fileExist = file.Length > 0;
             return !directoryEmpty | fileExist;
         }
 
         // Parameter: path ke rootnya dan nama file yang dicari
-        public void searchFilePathBFS(string filename, string rootDir, bool FindAll) {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+        public void searchFilePathBFS(string rootDir, string filename, int stepDelay, bool FindAll) {
 
             List<string> res = new List<string>();
             Queue<string> q = new Queue<string>();
+            Queue<Microsoft.Msagl.Drawing.Node> nodeQueue = new Queue<Microsoft.Msagl.Drawing.Node>();
             string dir = rootDir;
             // Add node di awal untuk root
             q.Enqueue(rootDir);
+            nodeQueue.Enqueue(fileGraph.R);
+
+            Microsoft.Msagl.Drawing.Node currentParentNode = fileGraph.R;
+            currentParentNode.Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
+
             // Implementasi
-            if (FindAll) {
-                while (q.Count > 0) {
-                    Console.WriteLine("Dequeing.....");
-                    dir = q.Dequeue();
-                    string[] directories = Directory.GetDirectories(dir, "*");
-                    if (directories.Length == 0) {
-                        Console.WriteLine("Visiting: " + Path.GetFileName(dir));
+            while (q.Count > 0 && (FindAll || this.solutionPath.Count == 0))
+            {
+                dir = q.Dequeue();
+
+                currentParentNode = nodeQueue.Dequeue();
+                string[] directories = Directory.GetDirectories(dir, "*");
+
+                // Tambahkan node semua folder directory
+                Array.Reverse(directories);
+
+                foreach (string directory in directories)
+                {
+                    Microsoft.Msagl.Drawing.Node N = fileGraph.AddEdgeBlack(currentParentNode, Path.GetFileName(directory));
+                }
+
+                Array.Reverse(directories);
+
+                // Tambahkan node semua file directory
+                string[] files = Directory.GetFiles(dir);
+
+                Array.Reverse(files);
+
+                foreach (string file in files)
+                {
+                    Microsoft.Msagl.Drawing.Node N = fileGraph.AddEdgeBlack(currentParentNode, Path.GetFileName(file));
+                }
+
+                Array.Reverse(files);
+
+                // Tampilkan pohon
+                fileGraph.showGraph(this.viewer, stepDelay);
+
+                // Search file
+                foreach (string file in files)
+                {
+                    if (Path.GetFileName(file).Equals(filename))
+                    {
+                        this.setSolution(file);
+                        fileGraph.TurnBlue(fileGraph.dirToList(file));
+                        fileGraph.showGraph(this.viewer, stepDelay);
+                        if (!FindAll)
+                        {
+                            break;
+                        }
                     }
-                    foreach (string directory in directories) {
+                    else
+                    {
+                        Microsoft.Msagl.Drawing.Node N = fileGraph.ColorEdgeRed(currentParentNode, Path.GetFileName(file));
+                        FileGraph.ColorNodeRed(N);
+                        fileGraph.showGraph(this.viewer, stepDelay);
+                    }
+                }
+
+                // Search directory
+                if (FindAll || this.solutionPath.Count == 0)
+                {
+                    foreach (string directory in directories)
+                    {
                         string dirName = Path.GetFileName(directory);
-                        // Hanya untuk debugging, kalau sudah fix, boleh dihapus
-                        Console.WriteLine("Visiting: " + dirName);
-                        // Valid artinya directory ada isinya
-                        if (isDirectoryValid(dirName, filename, directory)) {
-                            //Console.WriteLine(dirName + " is Valid");
+                        Microsoft.Msagl.Drawing.Node N = fileGraph.ColorEdgeRed(currentParentNode, Path.GetFileName(directory));
+                        FileGraph.ColorNodeRed(N);
+                        if (isDirectoryValid(directory))
+                        {
                             q.Enqueue(directory);
+                            nodeQueue.Enqueue(N);
                         }
-                        this.addPath(directory);
-                        // Cek apakah punya file atau tidak
+
+                        fileGraph.showGraph(this.viewer, stepDelay);
                     }
-                    if (isExistFileInDirectory(dir)) {
-                        var files = Directory.GetFiles(dir);
-                        //Console.Write(dirName + " files: ");
-                        foreach (string file in files) {
-                            this.addPath(file);
-                            if (Path.GetFileName(file) == filename) {
-                                this.setSolution(file);
-                            }
-                        }
-                    }
-                }
-                if (this.getSolutionPath().Count == 0) {
-                    this.setSolution("File not found");
-                }
-            } else {
-                while ((!isFileFound(dir, filename)) & q.Count > 0) {
-                    Console.WriteLine("Dequeing.....");
-                    dir = q.Dequeue();
-                    string[] directories = Directory.GetDirectories(dir, "*");
-                    if (directories.Length == 0) {
-                        Console.WriteLine("Visiting: " + Path.GetFileName(dir));
-                    }
-                    foreach (string directory in directories) {
-                        string dirName = Path.GetFileName(directory);
-                        // Hanya untuk debugging, kalau sudah fix, boleh dihapus
-                        Console.WriteLine("Visiting: " + dirName);
-                        // Valid artinya directory ada isinya
-                        if (isDirectoryValid(dirName, filename, directory)) {
-                            //Console.WriteLine(dirName + " is Valid");
-                            q.Enqueue(directory);
-                        }
-                        this.addPath(directory);
-                        // Cek apakah punya file atau tidak
-                    }
-                    if (isExistFileInDirectory(dir)) {
-                        var files = Directory.GetFiles(dir);
-                        //Console.Write(dirName + " files: ");
-                        foreach (string file in files) {
-                            this.addPath(file);
-                        }
-                    }
-                }
-                string[] solution = Directory.GetFiles(dir, filename);
-                if (solution.Length > 0) {
-                    this.setSolution(solution[0]);
-                } else {
-                    this.setSolution("File not found");
                 }
             }
-
-            stopwatch.Stop();
-            this.setExecutionTime(stopwatch.ElapsedMilliseconds);
         }
     }
 }

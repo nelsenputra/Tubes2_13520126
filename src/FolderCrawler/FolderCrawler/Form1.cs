@@ -57,6 +57,7 @@ namespace FolderCrawler
             BFSButton.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
             BFSButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             BFSButton.ForeColor = System.Drawing.Color.DimGray;
+
         }
 
         private void BFSButton_Click(object sender, EventArgs e)
@@ -73,11 +74,52 @@ namespace FolderCrawler
             DFSButton.ForeColor = System.Drawing.Color.DimGray;
         }
 
+        private void DFSButton_MouseEnter(object sender, EventArgs e)
+        {
+            if (Program.searchMethod == "DFS")
+            {
+                DFSButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            }
+            else
+            {
+                DFSButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            }
+        }
+
+        private void DFSButton_MouseLeave(object sender, EventArgs e)
+        {
+            DFSButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+        }
+
+        private void BFSButton_MouseEnter(object sender, EventArgs e)
+        {
+            if (Program.searchMethod == "BFS")
+            {
+                BFSButton.BackColor = DFSButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            }
+            else
+            {
+                BFSButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            }
+        }
+
+        private void BFSButton_MouseLeave(object sender, EventArgs e)
+        {
+            BFSButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+        }
+
+
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            SearchButton.Enabled = false;
+            bool isNumeric = int.TryParse(StepDelayTextbox.Text, out _);
             if (FileNameTextBox.Text == "")
             {
                 MessageBox.Show("File name must be filled out!");
+            }
+            else if (!isNumeric)
+            {
+                MessageBox.Show("Step delay must be integer!");
             }
             else
             {
@@ -85,36 +127,34 @@ namespace FolderCrawler
                 string searchMethod = Program.searchMethod;
                 string filename = FileNameTextBox.Text;
                 bool findAllOccurance = AllOccCheckbox.Checked;
+                int.TryParse(StepDelayTextbox.Text, out int stepDelay);
 
                 PathFlowPanel.Controls.Clear();
+                gViewer.Graph = null;
 
                 // Label metode pencarian yang digunakan
-                Label methodLabel = new Label(); 
+                Label methodLabel = new Label();
                 methodLabel.Text = string.Format("{0} method is used in searching process.", searchMethod);
                 methodLabel.AutoSize = true;
                 methodLabel.ForeColor = Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
                 PathFlowPanel.Controls.Add(methodLabel);
 
-                Stopwatch stopwatch = new Stopwatch();
+                Stopwatch stopwatch = Stopwatch.StartNew();
 
+                DFS dfs = null;
+                BFS bfs = null;
                 if (searchMethod == "DFS")
                 {
                     // Lakukan pencarian dengan metode DFS
-                    stopwatch.Start();
-                    FileGraphExample.mFileGraph(gViewer);
-
-                    // Fungsi pencarian dengan metode DFS
-
+                    dfs = new DFS(startingDirectory, gViewer);
+                    dfs.searchFilePathDFS(startingDirectory, filename, null, stepDelay, findAllOccurance);
                     stopwatch.Stop();
                 }
                 else if (searchMethod == "BFS")
                 {
                     // Lakukan pencarian dengan metode BFS
-                    stopwatch.Start();
-                    FileGraphExample.mFileGraph(gViewer);
-
-                    // Fungsi pencarian dengan metode BFS
-
+                    bfs = new BFS(startingDirectory, gViewer);
+                    bfs.searchFilePathBFS(startingDirectory, filename, stepDelay, findAllOccurance);
                     stopwatch.Stop();
                 }
 
@@ -124,7 +164,7 @@ namespace FolderCrawler
                 searchTimeLabel.AutoSize = true;
                 searchTimeLabel.ForeColor = Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
                 PathFlowPanel.Controls.Add(searchTimeLabel);
-                
+
                 // Path hasil pencarian
                 Label spacing = new Label();
                 spacing.Text = "-----------------------------------";
@@ -132,20 +172,48 @@ namespace FolderCrawler
                 spacing.ForeColor = Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
                 PathFlowPanel.Controls.Add(spacing);
 
-                
+
                 Label pathsLabel = new Label();
-                pathsLabel.Text = "File Paths: ";
+                pathsLabel.Text = "File Path(s): ";
                 pathsLabel.AutoSize = true;
                 pathsLabel.ForeColor = Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
                 PathFlowPanel.Controls.Add(pathsLabel);
 
-                // Masih hardcoded pathnya
-                // Untuk mengetes, ganti pathLinkLabel.Text menjadi directory yang valid
-                addDirectoryLinkLabel("C:\\Users\\owner\\OneDrive - Institut Teknologi Bandung\\Semester 4\\Strategi Algoritma\\booklet-3-31e2.jpg", PathFlowPanel);
+                if (searchMethod == "DFS")
+                {
+                    if (dfs.getSolutionPath().Count > 0)
+                    {
+                        foreach (String dir in dfs.getSolutionPath())
+                        {
+                            Console.WriteLine(dir);
+                            addDirectoryLinkLabel(dir, PathFlowPanel);
+                        }
+                    }
+                    else
+                    {
+                        addNotFoundLabel(PathFlowPanel);
+                    }
+                }
+                else if (searchMethod == "BFS")
+                {
+                    if (bfs.getSolutionPath().Count > 0)
+                    {
+                        foreach (String dir in bfs.getSolutionPath())
+                        {
+                            Console.WriteLine(dir);
+                            addDirectoryLinkLabel(dir, PathFlowPanel);
+                        }
+                    }
+                    else
+                    {
+                        addNotFoundLabel(PathFlowPanel);
+                    }
+                }
             }
+            SearchButton.Enabled = true;
         }
 
-        void PathLinkLabel_Clicked(object sender, EventArgs e)
+        public void PathLinkLabel_Clicked(object sender, EventArgs e)
         {
             // Event Handler untuk path link label yang dihasilkan dari pencarian
             LinkLabel linkLabel = sender as LinkLabel;
@@ -164,7 +232,7 @@ namespace FolderCrawler
             }
         }
 
-        void addDirectoryLinkLabel(String directory, FlowLayoutPanel flp)
+        public void addDirectoryLinkLabel(String directory, FlowLayoutPanel flp)
         {
             LinkLabel pathLinkLabel = new LinkLabel();
             pathLinkLabel.Text = directory;
@@ -173,5 +241,15 @@ namespace FolderCrawler
             pathLinkLabel.Click += new EventHandler(PathLinkLabel_Clicked);
             flp.Controls.Add(pathLinkLabel);
         }
+
+        public void addNotFoundLabel(FlowLayoutPanel flp)
+        {
+            Label notFoundLabel = new Label();
+            notFoundLabel.Text = "No matching file found";
+            notFoundLabel.AutoSize = true;
+            notFoundLabel.ForeColor = Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            flp.Controls.Add(notFoundLabel);
+        }
+
     }
 }

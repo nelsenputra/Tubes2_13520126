@@ -2,188 +2,142 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace FolderCrawler {
-    public class DFS {
+namespace FolderCrawler
+{
+    public class DFS
+    {
         static System.Collections.Specialized.StringCollection log = new System.Collections.Specialized.StringCollection();
-        static bool check = false;
 
-        private float executionTime;
-        private List<string> searchPath;
-        private string solutionPath;
-        private List<string> solutionPathAll;
+        private List<string> solutionPath = new List<String>();
 
-        // Driver
-        // public void Main() {
-        //     Console.WriteLine("Enter file name: ");
-        //     string query = Console.ReadLine();
+        private Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
+        private FileGraph fileGraph;
 
-        //     // Menyimpan jumlah nama drive dalam komputer (full computer search), nanti ambil dari GUI aja
-        //     string[] drives = System.Environment.GetLogicalDrives();
-
-        //     foreach (string dr in drives) {
-        //         System.IO.DriveInfo di = new System.IO.DriveInfo(dr);
-
-        //         if (!di.IsReady) {
-        //             Console.WriteLine("The drive {0} could not be read", di.Name);
-        //             continue;
-        //         }
-        //         System.IO.DirectoryInfo rootDir = di.RootDirectory;
-        //         if (this.findAll) {
-        //             searchAllFilePathDFS(rootDir.FullName, query);
-        //         } else {
-        //             searchFilePathDFS(rootDir.FullName, query);
-        //         }
-        //     }
-
-        //     // Menuliskan jalur crawling DFS
-        //     Console.WriteLine("Directory crawled:");
-        //     foreach (string dr in this.searchPath) {
-        //         Console.WriteLine(dr);
-        //     }
-
-        //     // Menuliskan path solusi
-        //     if (this.findAll) {
-        //         Console.WriteLine("Solution Path:");
-        //         foreach (string dr in this.solutionPathAll) {
-        //             Console.WriteLine(dr);
-        //         }
-        //     } else {
-        //         Console.WriteLine("Solution Path:");
-        //         Console.WriteLine(this.solutionPath);            
-        //     }
-
-        //     // Menuliskan directory restricted apa saja yang dilalui
-        //     Console.WriteLine("Files with restricted access:");
-        //     foreach (string s in log) {
-        //         Console.WriteLine(s);
-        //     }
-
-        //     Console.WriteLine("Press any key");
-        //     Console.ReadKey();
-        // }
-
-        public List<string> getSearchPaths() {
-            return this.searchPath;
+        public DFS()
+        {
+            this.solutionPath = new List<string>();
         }
 
-        public string getSolutionPath() {
+        public DFS(string rootDirectory, Microsoft.Msagl.GraphViewerGdi.GViewer viewer)
+        {
+            this.solutionPath = new List<string>();
+            this.fileGraph = new FileGraph(rootDirectory);
+            this.viewer = viewer;
+        }
+
+        public List<string> getSolutionPath()
+        {
             return this.solutionPath;
         }
 
-        public List<string> getSolutionPathAll() {
-            return this.solutionPathAll;
+
+        public void addSolution(string Path)
+        {
+            this.solutionPath.Add(Path);
         }
 
-        public float getExecutionTime() {
-            return this.executionTime;
-        }
-
-        public void setExecutionTime(float t) {
-            this.executionTime = t;
-        }
-
-        public void addPath(string Path) {
-            this.searchPath.Add(Path);
-        }
-
-        public void setSolution(string Path) {
-            this.solutionPath = Path;
-        }
-
-        public DFS() {
-            this.searchPath = new List<string>();
-            this.solutionPath = "File not found";
-            this.solutionPathAll = new List<string>();
-        }
-
-        public void searchFilePathDFS(string start, string search) {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
+        public void searchFilePathDFS(string start, string search, Microsoft.Msagl.Drawing.Node startingNode, int stepDelay, bool findAll)
+        {
             // Mengecek apakah file sudah ketemu atau belum
-            if (check) {
+            if (solutionPath.Count > 0 && !findAll)
+            {
                 return;
             }
 
+            // Inisialisasi
             System.IO.DirectoryInfo root = new System.IO.DirectoryInfo(start);
             System.IO.FileInfo[] files = null;
             System.IO.DirectoryInfo[] subDirs = null;
 
-            try {
+            if (startingNode == null)
+            {
+                startingNode = fileGraph.R;
+            }
+
+            try
+            {
                 files = root.GetFiles("*.*");
             }
             // Handle dir yang tidak bisa akses
-            catch (UnauthorizedAccessException e) {
+            catch (UnauthorizedAccessException e)
+            {
                 log.Add(e.Message);
             }
             // Handle dir yang not found
-            catch (System.IO.DirectoryNotFoundException e) {
+            catch (System.IO.DirectoryNotFoundException e)
+            {
                 Console.WriteLine(e.Message);
             }
 
-            if (files != null) {
-                foreach (System.IO.FileInfo fi in files) {
-                    this.searchPath.Add(fi.FullName);
+            if (files != null)
+            {
+                // Ubah node menjadi warna merah jika warna awalnya bukan
+
+                if (startingNode.Attr.Color != Microsoft.Msagl.Drawing.Color.Blue)
+                {
+                    startingNode.Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
+                }
+
+                // Tambahkan node semua folder start directory 
+                subDirs = root.GetDirectories();
+                // Dilakukan Reverse agar pembentukan pohon rapih
+                Array.Reverse(subDirs);
+
+                foreach (System.IO.DirectoryInfo dirInfo in subDirs)
+                {
+                    Microsoft.Msagl.Drawing.Node subdirectory = fileGraph.AddEdgeBlack(startingNode, dirInfo.Name);
+                }
+
+                Array.Reverse(subDirs);
+
+                // Tambahkan node semua file start directory
+                Array.Reverse(files);
+                foreach (System.IO.FileInfo file in files)
+                {
+                    Microsoft.Msagl.Drawing.Node subdirectory = fileGraph.AddEdgeBlack(startingNode, file.Name);
+                }
+                Array.Reverse(files);
+
+                // Tampilkan pohon
+                fileGraph.showGraph(viewer, stepDelay);
+
+
+                foreach (System.IO.FileInfo fi in files)
+                {
                     // Mengecek apakah file merupakan yang dicari
-                    if (search.Equals(fi.Name)) {
-                        check = true;
-                        this.solutionPath = fi.FullName;
-                        break;
+                    if (search.Equals(fi.Name))
+                    {
+                        this.addSolution(fi.FullName);
+                        fileGraph.TurnBlue(fileGraph.dirToList(fi.FullName));
+
+                        // Tampilkan pohon
+                        fileGraph.showGraph(viewer, stepDelay);
+
+                        if (!findAll)
+                        {
+                            break;
+                        }  
+                    }
+                    else
+                    {
+                        Microsoft.Msagl.Drawing.Node N = fileGraph.ColorEdgeRed(startingNode, fi.Name);
+                        FileGraph.ColorNodeRed(N);
+
+                        // Tampilkan pohon
+                        fileGraph.showGraph(viewer, stepDelay);
                     }
                 }
 
-                subDirs = root.GetDirectories();
-
                 // Melanjutkan DFS
-                foreach (System.IO.DirectoryInfo dirInfo in subDirs) {
-                    searchFilePathDFS(dirInfo.FullName, search);
-                }
-            }
-
-            stopwatch.Stop();
-            this.setExecutionTime(stopwatch.ElapsedMilliseconds);
-        }
-
-        public void searchAllFilePathDFS(string start, string search){
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            System.IO.DirectoryInfo root = new System.IO.DirectoryInfo(start);
-            System.IO.FileInfo[] files = null;
-            System.IO.DirectoryInfo[] subDirs = null;
-
-            try {
-                files = root.GetFiles("*.*");
-            }
-            // Handle dir yang tidak bisa akses
-            catch (UnauthorizedAccessException e) {
-                log.Add(e.Message);
-            }
-            // Handle dir yang not found
-            catch (System.IO.DirectoryNotFoundException e) {
-                Console.WriteLine(e.Message);
-            }
-
-            if (files != null) {
-                foreach (System.IO.FileInfo fi in files) {
-                    this.searchPath.Add(fi.FullName);
-                    // Mengecek apakah file merupakan yang dicari
-                    if (search.Equals(fi.Name)) {
-                        this.solutionPathAll.Add(fi.FullName);
+                if (findAll || this.solutionPath.Count == 0)
+                {
+                    foreach (System.IO.DirectoryInfo dirInfo in subDirs)
+                    {
+                        Microsoft.Msagl.Drawing.Node nextNode = fileGraph.ColorEdgeRed(startingNode, dirInfo.Name);
+                        searchFilePathDFS(dirInfo.FullName, search, nextNode, stepDelay, findAll);
                     }
                 }
-
-                subDirs = root.GetDirectories();
-
-                // Melanjutkan DFS
-                foreach (System.IO.DirectoryInfo dirInfo in subDirs) {
-                    searchFilePathDFS(dirInfo.FullName, search);
-                }
             }
-
-            stopwatch.Stop();
-            this.setExecutionTime(stopwatch.ElapsedMilliseconds);
         }
-
     }
 }

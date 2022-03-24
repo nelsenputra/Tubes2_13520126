@@ -67,9 +67,25 @@ namespace FolderCrawler
             var el = A.OutEdges.ToArray();
             foreach (var e in el)
             {
-                if (e.TargetNode.LabelText.Equals(B) && e.Attr.Color != Microsoft.Msagl.Drawing.Color.Blue)
+                if (e.TargetNode.LabelText.Equals(B))
                 {
                     e.Attr.Color = Microsoft.Msagl.Drawing.Color.Blue;
+                    N = e.TargetNode;
+                }
+            }
+            return N;
+        }
+
+        // Turn edge(A,B) to color red, A and B must be conected
+        public Microsoft.Msagl.Drawing.Node ColorEdgeRed(Microsoft.Msagl.Drawing.Node A, String B)
+        {
+            Microsoft.Msagl.Drawing.Node N = null;
+            var el = A.OutEdges.ToArray();
+            foreach (var e in el)
+            {
+                if (e.TargetNode.LabelText.Equals(B) && e.Attr.Color != Microsoft.Msagl.Drawing.Color.Blue)
+                {
+                    e.Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
                     N = e.TargetNode;
                 }
             }
@@ -87,23 +103,36 @@ namespace FolderCrawler
         }
 
         // Turn all node root to node goal to color blue. Following the directory path in an array of string (node label)
-        public void TurnBlue(String[] L)
+        public void TurnBlue(List<string> L)
         {
             ColorNodeBlue(R);
             Microsoft.Msagl.Drawing.Node N = R;
-            for (int i = 0; i < L.Length; i++)
+            foreach (String name in L)
             {
-                N = ColorEdgeBlue(N, L[i]);
+                N = ColorEdgeBlue(N, name);
                 ColorNodeBlue(N);
             }
         }
 
+        public List<string> dirToList(string directory)
+        {
+            List<string> list = new List<string>();
+            while(directory != this.R.Label.Text)
+            {
+                list.Insert(0, System.IO.Path.GetFileName(directory));
+                directory = System.IO.Directory.GetParent(directory).FullName;
+            }
+            return list;
+        }
+
         // SHOW GRAPH
 
-        public void showGraph(Microsoft.Msagl.GraphViewerGdi.GViewer viewer)
+        public void showGraph(Microsoft.Msagl.GraphViewerGdi.GViewer viewer, int delay)
         {
             //bind the graph to the viewer 
             viewer.Graph = graph;
+            System.Windows.Forms.Application.DoEvents();
+            System.Threading.Thread.Sleep(delay);
         }
 
     }

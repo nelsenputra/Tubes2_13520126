@@ -33,6 +33,9 @@
             this.PathFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.gViewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
             this.ConfigPanel = new System.Windows.Forms.Panel();
+            this.msLabel = new System.Windows.Forms.Label();
+            this.StepDelayTextbox = new System.Windows.Forms.TextBox();
+            this.stepDelayLabel = new System.Windows.Forms.Label();
             this.AllOccCheckbox = new System.Windows.Forms.CheckBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.BFSButton = new System.Windows.Forms.Button();
@@ -64,7 +67,7 @@
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayoutPanel.Size = new System.Drawing.Size(1134, 601);
+            this.TableLayoutPanel.Size = new System.Drawing.Size(1348, 721);
             this.TableLayoutPanel.TabIndex = 0;
             // 
             // PathFlowPanel
@@ -73,9 +76,9 @@
             this.PathFlowPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.PathFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PathFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PathFlowPanel.Location = new System.Drawing.Point(443, 483);
+            this.PathFlowPanel.Location = new System.Drawing.Point(443, 579);
             this.PathFlowPanel.Name = "PathFlowPanel";
-            this.PathFlowPanel.Size = new System.Drawing.Size(688, 115);
+            this.PathFlowPanel.Size = new System.Drawing.Size(902, 139);
             this.PathFlowPanel.TabIndex = 0;
             this.PathFlowPanel.WrapContents = false;
             // 
@@ -109,7 +112,7 @@
             this.gViewer.SaveButtonVisible = true;
             this.gViewer.SaveGraphButtonVisible = true;
             this.gViewer.SaveInVectorFormatEnabled = true;
-            this.gViewer.Size = new System.Drawing.Size(688, 474);
+            this.gViewer.Size = new System.Drawing.Size(902, 570);
             this.gViewer.TabIndex = 1;
             this.gViewer.TightOffsetForRouting = 0.125D;
             this.gViewer.ToolBarIsVisible = true;
@@ -123,6 +126,9 @@
             // 
             this.ConfigPanel.AutoScroll = true;
             this.ConfigPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ConfigPanel.Controls.Add(this.msLabel);
+            this.ConfigPanel.Controls.Add(this.StepDelayTextbox);
+            this.ConfigPanel.Controls.Add(this.stepDelayLabel);
             this.ConfigPanel.Controls.Add(this.AllOccCheckbox);
             this.ConfigPanel.Controls.Add(this.SearchButton);
             this.ConfigPanel.Controls.Add(this.BFSButton);
@@ -138,8 +144,35 @@
             this.ConfigPanel.Location = new System.Drawing.Point(3, 3);
             this.ConfigPanel.Name = "ConfigPanel";
             this.TableLayoutPanel.SetRowSpan(this.ConfigPanel, 2);
-            this.ConfigPanel.Size = new System.Drawing.Size(434, 595);
+            this.ConfigPanel.Size = new System.Drawing.Size(434, 715);
             this.ConfigPanel.TabIndex = 2;
+            // 
+            // msLabel
+            // 
+            this.msLabel.AutoSize = true;
+            this.msLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.msLabel.Location = new System.Drawing.Point(316, 369);
+            this.msLabel.Name = "msLabel";
+            this.msLabel.Size = new System.Drawing.Size(40, 25);
+            this.msLabel.TabIndex = 13;
+            this.msLabel.Text = "ms";
+            // 
+            // StepDelayTextbox
+            // 
+            this.StepDelayTextbox.Location = new System.Drawing.Point(160, 366);
+            this.StepDelayTextbox.Name = "StepDelayTextbox";
+            this.StepDelayTextbox.Size = new System.Drawing.Size(150, 33);
+            this.StepDelayTextbox.TabIndex = 12;
+            // 
+            // stepDelayLabel
+            // 
+            this.stepDelayLabel.AutoSize = true;
+            this.stepDelayLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.stepDelayLabel.Location = new System.Drawing.Point(39, 369);
+            this.stepDelayLabel.Name = "stepDelayLabel";
+            this.stepDelayLabel.Size = new System.Drawing.Size(111, 25);
+            this.stepDelayLabel.TabIndex = 11;
+            this.stepDelayLabel.Text = "Step Delay";
             // 
             // AllOccCheckbox
             // 
@@ -154,7 +187,7 @@
             // 
             // SearchButton
             // 
-            this.SearchButton.Location = new System.Drawing.Point(44, 502);
+            this.SearchButton.Location = new System.Drawing.Point(44, 557);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(100, 50);
             this.SearchButton.TabIndex = 9;
@@ -169,13 +202,15 @@
             this.BFSButton.FlatAppearance.BorderSize = 5;
             this.BFSButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BFSButton.ForeColor = System.Drawing.Color.DimGray;
-            this.BFSButton.Location = new System.Drawing.Point(220, 402);
+            this.BFSButton.Location = new System.Drawing.Point(220, 457);
             this.BFSButton.Name = "BFSButton";
             this.BFSButton.Size = new System.Drawing.Size(170, 60);
             this.BFSButton.TabIndex = 8;
             this.BFSButton.Text = "BFS";
             this.BFSButton.UseVisualStyleBackColor = false;
             this.BFSButton.Click += new System.EventHandler(this.BFSButton_Click);
+            this.BFSButton.MouseEnter += new System.EventHandler(this.BFSButton_MouseEnter);
+            this.BFSButton.MouseLeave += new System.EventHandler(this.BFSButton_MouseLeave);
             // 
             // DFSButton
             // 
@@ -184,13 +219,15 @@
             this.DFSButton.FlatAppearance.BorderSize = 5;
             this.DFSButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DFSButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.DFSButton.Location = new System.Drawing.Point(50, 402);
+            this.DFSButton.Location = new System.Drawing.Point(50, 457);
             this.DFSButton.Name = "DFSButton";
             this.DFSButton.Size = new System.Drawing.Size(170, 60);
             this.DFSButton.TabIndex = 7;
             this.DFSButton.Text = "DFS";
             this.DFSButton.UseVisualStyleBackColor = false;
             this.DFSButton.Click += new System.EventHandler(this.DFSButton_Click);
+            this.DFSButton.MouseEnter += new System.EventHandler(this.DFSButton_MouseEnter);
+            this.DFSButton.MouseLeave += new System.EventHandler(this.DFSButton_MouseLeave);
             // 
             // FileNameTextBox
             // 
@@ -225,7 +262,7 @@
             // 
             this.SearchMethodLabel.AutoSize = true;
             this.SearchMethodLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.SearchMethodLabel.Location = new System.Drawing.Point(39, 359);
+            this.SearchMethodLabel.Location = new System.Drawing.Point(39, 414);
             this.SearchMethodLabel.Name = "SearchMethodLabel";
             this.SearchMethodLabel.Size = new System.Drawing.Size(154, 25);
             this.SearchMethodLabel.TabIndex = 3;
@@ -266,7 +303,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1134, 601);
+            this.ClientSize = new System.Drawing.Size(1348, 721);
             this.Controls.Add(this.TableLayoutPanel);
             this.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
@@ -295,6 +332,9 @@
         private System.Windows.Forms.Label StartDirLabel;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.CheckBox AllOccCheckbox;
+        private System.Windows.Forms.TextBox StepDelayTextbox;
+        private System.Windows.Forms.Label stepDelayLabel;
+        private System.Windows.Forms.Label msLabel;
     }
 }
 
