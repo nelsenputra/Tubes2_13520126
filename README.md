@@ -28,6 +28,8 @@ This project was created by:
 
 
 ## General Information
+![SearchFeature](https://www.digitalcitizen.life/wp-content/uploads/2020/10/explorer_search_10.png)
+
 When we have a desire to find a specific file stored in our computer, it usually takes a long time if we do it manually by checking whether the file exists in certain folder. Not only do we have to open several folders to reach the desired directory, we even by worse can forget where we put the file we are looking for. As a consequence, we have to open various folders one by one until we find the desired file. This is for sure will be very time and energy consuming.
 
 However, we don't need to worry anymore about this problem right now. The reason is, almost all operating systems already provide a file explorer feature that can be used to find the exact file we want. We do it simply by entering a query or keyword in the search box, then the computer will search for all files in a starting directory (up to all of its children) which correspond to the query we entered.
