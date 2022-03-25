@@ -53,7 +53,7 @@ searched, so that file can be directly accessed via browser or file explorer
 
 
 ## Overview
-![Overview]https://drive.google.com/file/d/17XuObXs3YxAMvNqSmptsZ7z9CUP7Qe5C/view?usp=sharing
+![Overview](https://drive.google.com/uc?export=view&id=1_hT1eO8VugiLuk7CbM8qe6-UxR1P_8_D)
 
 
 ## Setup
@@ -68,10 +68,9 @@ searched, so that file can be directly accessed via browser or file explorer
     `git clone https://github.com/nelsenputra/Tubes2_13520126.git`
 
 2. Open the directory in Visual Studio
-
-    `cd IF2124-pythonCompiler`
     
 3. In Solution Explorer, select FolderCrawler.sln
+ 
 4. Click Start
 
 
