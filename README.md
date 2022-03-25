@@ -53,7 +53,7 @@ searched, so that file can be directly accessed via browser or file explorer
 
 
 ## Overview
-![Overview](insert link screenshot program GUInya di sini)
+![Overview]https://drive.google.com/file/d/17XuObXs3YxAMvNqSmptsZ7z9CUP7Qe5C/view?usp=sharing
 
 
 ## Setup
@@ -62,16 +62,17 @@ searched, so that file can be directly accessed via browser or file explorer
 - Install the whole modules and [libraries](#library) used in the source code
 - Download the whole folders and files in this repository or do clone the repository
 
-### Execution
+### Compilation 
 1. Clone this repository in your own local directory
 
     `git clone https://github.com/nelsenputra/Tubes2_13520126.git`
 
-2. Open the command line and change the directory to 'IF2124-pythonCompiler'
+2. Open the directory in Visual Studio
 
     `cd IF2124-pythonCompiler`
     
-3. Run `...` on the command line
+3. In Solution Explorer, select FolderCrawler.sln
+4. Click Start
 
 
 ## Project Status
