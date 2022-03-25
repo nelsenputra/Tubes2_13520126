@@ -53,7 +53,7 @@ searched, so that file can be directly accessed via browser or file explorer
 
 
 ## Overview
-![Overview](https://drive.google.com/uc?export=view&id=1_hT1eO8VugiLuk7CbM8qe6-UxR1P_8_D)
+![Overview](img/GUIExample.jpg)
 
 
 ## Setup
