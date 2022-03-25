@@ -135,6 +135,10 @@ namespace FolderCrawler
                     {
                         Microsoft.Msagl.Drawing.Node nextNode = fileGraph.ColorEdgeRed(startingNode, dirInfo.Name);
                         searchFilePathDFS(dirInfo.FullName, search, nextNode, stepDelay, findAll);
+                        if (!findAll && this.solutionPath.Count != 0)
+                        {
+                            break;
+                        }
                     }
                 }
             }

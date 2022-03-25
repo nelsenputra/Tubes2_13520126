@@ -11,27 +11,6 @@ namespace FolderCrawler {
         private Microsoft.Msagl.GraphViewerGdi.GViewer viewer;
         private FileGraph fileGraph;
 
-        /*
-        public static void Main(string[] args) {
-            // Mengambil path dari GUI
-            string rootPath = @"/Users/";
-            string[] rootDirs = Directory.GetFiles(rootPath, "*");
-
-            BFS bfs = new BFS();
-            bfs.searchFilePathBFS("test.pdf", rootPath, true);
-            foreach (string res in bfs.getSearchPaths()) {
-                Console.WriteLine(res);
-            }
-
-            // Mengambil nama file di akhir path
-            Console.WriteLine(Path.GetFileName(bfs.getSolutionPath()[1]));
-            // Mengambil nama directory sebelum akhir path
-            Console.WriteLine(Path.GetFileName(Path.GetDirectoryName(bfs.getSolutionPath()[1])));
-
-            // Akses otomatis dilakukan berdasarkan abjad
-        }
-        */
-
         public BFS() {
             this.solutionPath = new List<string>();
         }
