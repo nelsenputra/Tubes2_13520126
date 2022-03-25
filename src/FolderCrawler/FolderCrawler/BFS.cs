@@ -78,21 +78,32 @@ namespace FolderCrawler {
 
             List<string> res = new List<string>();
             Queue<string> q = new Queue<string>();
-            Queue<Microsoft.Msagl.Drawing.Node> nodeQueue = new Queue<Microsoft.Msagl.Drawing.Node>();
+            Queue<Microsoft.Msagl.Drawing.Node> parentNodeQueue = new Queue<Microsoft.Msagl.Drawing.Node>();
             string dir = rootDir;
             // Add node di awal untuk root
             q.Enqueue(rootDir);
-            nodeQueue.Enqueue(fileGraph.R);
+            parentNodeQueue.Enqueue(fileGraph.R);
 
-            Microsoft.Msagl.Drawing.Node currentParentNode = fileGraph.R;
-            currentParentNode.Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
+            Microsoft.Msagl.Drawing.Node ParentNode = fileGraph.R;
+            ParentNode.Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
 
             // Implementasi
             while (q.Count > 0 && (FindAll || this.solutionPath.Count == 0))
             {
+                // Warnai node yang sedang dicek menjadi merah
                 dir = q.Dequeue();
+                ParentNode = parentNodeQueue.Dequeue();
 
-                currentParentNode = nodeQueue.Dequeue();
+                Microsoft.Msagl.Drawing.Node currentParentNode = fileGraph.R;
+
+                if (dir != rootDir)
+                {
+                    currentParentNode = fileGraph.ColorEdgeRed(ParentNode, Path.GetFileName(dir));
+                    currentParentNode.Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
+                }
+                
+                fileGraph.showGraph(this.viewer, stepDelay);
+
                 string[] directories = Directory.GetDirectories(dir, "*");
 
                 // Tambahkan node semua folder directory
@@ -147,15 +158,9 @@ namespace FolderCrawler {
                     foreach (string directory in directories)
                     {
                         string dirName = Path.GetFileName(directory);
-                        Microsoft.Msagl.Drawing.Node N = fileGraph.ColorEdgeRed(currentParentNode, Path.GetFileName(directory));
-                        FileGraph.ColorNodeRed(N);
-                        if (isDirectoryValid(directory))
-                        {
-                            q.Enqueue(directory);
-                            nodeQueue.Enqueue(N);
-                        }
 
-                        fileGraph.showGraph(this.viewer, stepDelay);
+                        q.Enqueue(directory);
+                        parentNodeQueue.Enqueue(currentParentNode);
                     }
                 }
             }
