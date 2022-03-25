@@ -49,11 +49,11 @@ The whole program was written in C# using Visual Studio.
 - [x] Display a list of paths of the corresponding leaves search result where the path is required to have a hyperlink to the parent folder of the file
 searched, so that file can be directly accessed via browser or file explorer
 - [x] Count and display the running time of the algorithm (the searching process)
-- [ ] **(Bonus)** Display the progress of tree formation by adding node according to current folder/file check take place
+- [x] **(Bonus)** Display the progress of tree formation by adding node according to current folder/file check take place
 
 
 ## Overview
-{Insert screenshot program GUInya di sini}
+![Overview](insert link screenshot program GUInya di sini)
 
 
 ## Setup
@@ -93,7 +93,7 @@ All the specifications were implemented.
 - This project was created to fulfill our Big Project for IF2211 Algorithm Strategies
 
 ## Library
-*
+* [MSAGL](https://www.microsoft.com/en-us/research/project/microsoft-automatic-graph-layout/)
 
 ## Contact
 Created by PenjelajahHatiAyank. 2022 All Rights Reserved.
